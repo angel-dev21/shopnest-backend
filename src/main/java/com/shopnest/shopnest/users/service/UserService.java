@@ -1,12 +1,13 @@
 package com.shopnest.shopnest.users.service;
 
+import com.shopnest.shopnest.users.dto.CreateUserDto;
 import com.shopnest.shopnest.users.dto.UserDto;
 
 import java.util.List;
 
 public interface UserService {
 
-    UserDto createUser(UserDto userDto);
+    UserDto createUser(CreateUserDto createUserDto);
 
     UserDto getUserById(Long userId);
 

@@ -7,6 +7,7 @@ import com.shopnest.shopnest.users.repository.UserRepository;
 import com.shopnest.shopnest.users.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import com.shopnest.shopnest.users.dto.CreateUserDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,26 +19,24 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public UserDto createUser(UserDto userDto) {
-        UserEntity user = UserMapper.mapToCartItem(userDto);
+    public UserDto createUser(CreateUserDto createUserDto) {
+        UserEntity user = UserMapper.mapToNewUser(createUserDto);
         UserEntity savedUser = userRepository.save(user);
-
-        return UserMapper.mapToCartItemDto(savedUser);
+        return UserMapper.mapToUserDto(savedUser);
     }
 
     @Override
     public UserDto getUserById(Long userId) {
         UserEntity user = userRepository.findById(userId)
-                .orElseThrow(() -> new ResourceNotFoundException("User with the id " + userId + "dont exist" ));
-
-        return UserMapper.mapToCartItemDto(user);
+                .orElseThrow(() -> new ResourceNotFoundException("User with the id " + userId + " doesn't exist"));
+        return UserMapper.mapToUserDto(user);
     }
 
     @Override
     public List<UserDto> getAllUsers() {
 
         List<UserEntity> users = userRepository.findAll();
-        return users.stream().map((user) -> UserMapper.mapToCartItemDto(user))
+        return users.stream().map((user) -> UserMapper.mapToUserDto(user))
                 .collect(Collectors.toList());
 
     }
@@ -45,7 +44,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto updateUser(Long userId, UserDto updatedUser) {
         UserEntity user = userRepository.findById(userId).orElseThrow(
-                () -> new ResourceNotFoundException("User with the id " + userId + "dont exist" )
+                () -> new ResourceNotFoundException("User with the id " + userId + " doesn't exist")
         );
 
         user.setUsername(updatedUser.getUsername());
@@ -57,7 +56,7 @@ public class UserServiceImpl implements UserService {
 
         UserEntity savedUser = userRepository.save(user);
 
-        return UserMapper.mapToCartItemDto(savedUser);
+        return UserMapper.mapToUserDto(savedUser);
     }
 
     @Override

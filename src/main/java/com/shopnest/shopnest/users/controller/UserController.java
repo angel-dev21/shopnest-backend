@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.shopnest.shopnest.users.dto.CreateUserDto;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,9 +35,8 @@ public class UserController {
 
     // Endpoint to create users
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
-        UserDto savedUser = userService.createUser(userDto);
-
+    public ResponseEntity<UserDto> createUser(@RequestBody CreateUserDto createUserDto) {
+        UserDto savedUser = userService.createUser(createUserDto);
         return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
     }
 
