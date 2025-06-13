@@ -17,9 +17,14 @@ public class ProductController {
     private final ProductService productService;
 
     @GetMapping
+    public ResponseEntity<List<ProductDto>> GetProductPage(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size){
+        return ResponseEntity.ok(productService.getPaginatedProducts(page, size));
+    }
+
+    /*@GetMapping
     public ResponseEntity<List<ProductDto>> getAllProducts() {
         return ResponseEntity.ok(productService.getAllProduct());
-    }
+    }*/
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
