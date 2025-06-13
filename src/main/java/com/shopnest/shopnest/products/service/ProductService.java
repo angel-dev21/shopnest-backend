@@ -6,6 +6,9 @@ import com.shopnest.shopnest.products.entity.Product;
 import com.shopnest.shopnest.products.mapper.ProductMapper;
 import com.shopnest.shopnest.products.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,10 +21,17 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
-    public List<ProductDto> getAllProduct(){
-        List<Product> products = productRepository.findAll();
+    public List<ProductDto> getPaginatedProducts(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Product> productPage = productRepository.findAll(pageable);
+        List<Product> products = productPage.getContent();
         return products.stream().map(productMapper::toProductDto).collect(Collectors.toList());
     }
+
+    /*public List<ProductDto> getAllProduct(){
+        List<Product> products = productRepository.findAll();
+        return products.stream().map(productMapper::toProductDto).collect(Collectors.toList());
+    }*/
 
     public ProductDto getProductById(Long id){
         Product product = productRepository.findById(id)
