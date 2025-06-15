@@ -24,8 +24,6 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private Long orderId;
-    @Column(name = "user_id")
-    private Long userId;
     @Column(name = "order_date")
     private LocalDateTime orderDate;
     @Column(name = "total_amount")
@@ -34,7 +32,7 @@ public class Order {
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private UserEntity user;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)

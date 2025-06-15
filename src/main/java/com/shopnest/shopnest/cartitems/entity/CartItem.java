@@ -19,8 +19,6 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cart_item_id")
     private Long cartItemId;
-    @Column(name = "cart_id")
-    private Long cartId;
     @Column(name = "product_id")
     private Long productId;
     @Column(name = "size_id")

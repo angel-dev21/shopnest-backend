@@ -1,3 +1,4 @@
+/*
 package com.shopnest.shopnest.favorites.entity;
 
 import jakarta.persistence.Column;
@@ -21,4 +22,4 @@ public class Favorite {
     @Column(name = "product_id")
     private Long productId;
 
-}
+}*/
