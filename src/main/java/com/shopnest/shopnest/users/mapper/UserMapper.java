@@ -3,26 +3,13 @@ package com.shopnest.shopnest.users.mapper;
 import com.shopnest.shopnest.users.dto.CreateUserDto;
 import com.shopnest.shopnest.users.dto.UserDto;
 import com.shopnest.shopnest.users.entity.UserEntity;
+import org.mapstruct.Mapper;
 
-public class UserMapper {
-    public static UserDto mapToUserDto(UserEntity user) {
-        return new UserDto(
-                user.getUserId(),
-                user.getUsername(),
-                user.getPassword(),
-                user.getEmail(),
-                user.getFirstName(),
-                user.getLastName()
-        );
-    }
+@Mapper(componentModel = "spring")
+public interface UserMapper {
 
-    public static UserEntity mapToNewUser(CreateUserDto userDto) {
-        UserEntity user = new UserEntity();
-        user.setUsername(userDto.getUsername());
-        user.setPassword(userDto.getPassword());
-        user.setEmail(userDto.getEmail());
-        user.setFirstName(userDto.getFirstName());
-        user.setLastName(userDto.getLastName());
-        return user;
-    }
+    UserDto toUserDto(UserEntity user);
+    UserEntity fromUserDto(UserDto userDto);
+    CreateUserDto toCreateUserDto(UserEntity userEntity);
+    UserEntity fromCreateUserDto(CreateUserDto createUserDto);
 }
