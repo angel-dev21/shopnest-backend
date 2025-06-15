@@ -18,8 +18,6 @@ public class OrderItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_item_id")
     private Long orderItemId;
-    @Column(name = "order_id")
-    private Long orderId;
     @Column(name = "product_id")
     private Long productId;
     @Column(name = "size_id")

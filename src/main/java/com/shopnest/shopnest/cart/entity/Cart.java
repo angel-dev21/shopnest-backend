@@ -24,8 +24,6 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cart_id")
     private Long cartId;
-    @Column(name = "user_id")
-    private Long userId;
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
 
