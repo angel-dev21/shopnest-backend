@@ -1,5 +1,6 @@
 package com.shopnest.shopnest.products.mapper;
 
+import com.shopnest.shopnest.products.dto.ProductDto;
 import com.shopnest.shopnest.products.dto.ProductResponseDto;
 import com.shopnest.shopnest.products.entity.Product;
 import com.shopnest.shopnest.products.entity.ProductImage;
@@ -14,8 +15,11 @@ import java.util.stream.Collectors;
 public interface ProductMapper {
     @Mapping(source = "subcategory.category.categoryId", target = "category.id")
     @Mapping(source = "subcategory.category.categoryName", target = "category.name")
+    //@Mapping(source = "productName", target = "name")
     @Mapping(target = "images", expression = "java(product.getImages().stream().map(img -> img.getUrl()).toList())")
+
     ProductResponseDto toProductResponseDto(Product product);
+    Product toProduct(ProductDto productDto);
 
     @Named("mapImageUrls")
     static List<String> mapImageUrls(List<ProductImage> images) {

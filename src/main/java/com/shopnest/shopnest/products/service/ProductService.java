@@ -29,6 +29,7 @@ public class ProductService {
         return products.stream().map(productMapper::toProductDto).collect(Collectors.toList());
     }*/
 
+    //FABRIZIO
     public ProductResponseDto getProductById(Long id){
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
