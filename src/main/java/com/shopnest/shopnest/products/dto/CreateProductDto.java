@@ -6,15 +6,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDto {
+public class CreateProductDto {
 
     private String name;
-    private String productDescription;
-    private BigDecimal productPrice;
-    private int stockQuantity;
-
+    private String code;
+    private String description;
+    private BigDecimal price;
+    private BigDecimal discount;
+    private Integer stock;
+    private Long subcategoryId; // Referencia a la subcategoría
 }
+
