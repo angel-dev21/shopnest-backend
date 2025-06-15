@@ -1,10 +1,15 @@
 package com.shopnest.shopnest.users.entity;
 
+import com.shopnest.shopnest.cart.entity.Cart;
+import com.shopnest.shopnest.orders.entity.Order;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,19 +25,25 @@ public class UserEntity {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "username", nullable = false, length = 50)
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "password", nullable = false, length = 255)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "email", nullable = false, length = 100)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "first_name", length = 50)
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name", length = 50)
+    @Column(name = "last_name")
     private String lastName;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Cart cart;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orders = new ArrayList<>();
 
 }
