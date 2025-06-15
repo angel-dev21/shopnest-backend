@@ -22,8 +22,6 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
-
-
     /*public List<ProductDto> getAllProduct(){
         List<Product> products = productRepository.findAll();
         return products.stream().map(productMapper::toProductDto).collect(Collectors.toList());
@@ -37,14 +35,14 @@ public class ProductService {
         return productMapper.toProductResponseDto(product);
     }
 
-    /*
-    public List<ProductDto> getPaginatedProducts(int page, int size) {
+    public List<ProductResponseDto> getPaginatedProducts(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Product> productPage = productRepository.findAll(pageable);
         List<Product> products = productPage.getContent();
-        return products.stream().map(productMapper::toProductDto).collect(Collectors.toList());
+        return products.stream().map(productMapper::toProductResponseDto).collect(Collectors.toList());
     }
 
+    /*
     public ProductDto addProduct(ProductDto productDto){
         Product product = productMapper.toProduct(productDto);
         Product savedProduct = productRepository.save(product);

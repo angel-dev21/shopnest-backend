@@ -17,8 +17,6 @@ public class ProductController {
 
     private final ProductService productService;
 
-
-
     /*@GetMapping
     public ResponseEntity<List<ProductDto>> getAllProducts() {
         return ResponseEntity.ok(productService.getAllProduct());
@@ -29,13 +27,12 @@ public class ProductController {
         return ResponseEntity.ok(productService.getProductById(id));
     }
 
-
-    /*
     @GetMapping
-    public ResponseEntity<List<ProductDto>> GetProductPage(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size){
+    public ResponseEntity<List<ProductResponseDto>> GetProductPage(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size){
         return ResponseEntity.ok(productService.getPaginatedProducts(page, size));
     }
 
+    /*
     @PostMapping
     public ResponseEntity<ProductDto> addProduct(@RequestBody ProductDto productDto) {
         return ResponseEntity.ok(productService.addProduct(productDto));
