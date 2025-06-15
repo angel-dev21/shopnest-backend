@@ -1,27 +1,27 @@
 package com.shopnest.shopnest.products.mapper;
 
-import com.shopnest.shopnest.products.dto.ProductDto;
+import com.shopnest.shopnest.products.dto.ProductResponseDto;
 import com.shopnest.shopnest.products.entity.Product;
-import org.springframework.stereotype.Component;
+import com.shopnest.shopnest.products.entity.ProductImage;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.Named;
 
-@Component
-public class ProductMapper {
+import java.util.List;
+import java.util.stream.Collectors;
 
-    public ProductDto toProductDto(Product product) {
-        ProductDto productDto = new ProductDto();
-        productDto.setProductName(product.getProductName());
-        productDto.setProductDescription(product.getProductDescription());
-        productDto.setProductPrice(product.getProductPrice());
-        productDto.setStockQuantity(product.getStockQuantity());
-        return productDto;
-    }
+@Mapper(componentModel = "spring")
+public interface ProductMapper {
+    @Mapping(source = "subcategory.category.categoryId", target = "category.id")
+    @Mapping(source = "subcategory.category.categoryName", target = "category.name")
+    @Mapping(target = "images", expression = "java(product.getImages().stream().map(img -> img.getUrl()).toList())")
+    ProductResponseDto toProductResponseDto(Product product);
 
-    public Product toProduct(ProductDto productDto) {
-        Product product = new Product();
-        product.setProductName(productDto.getProductName());
-        product.setProductDescription(productDto.getProductDescription());
-        product.setProductPrice(productDto.getProductPrice());
-        product.setStockQuantity(productDto.getStockQuantity());
-        return product;
+    @Named("mapImageUrls")
+    static List<String> mapImageUrls(List<ProductImage> images) {
+        if (images == null) return null;
+        return images.stream()
+                .map(ProductImage::getUrl)
+                .collect(Collectors.toList());
     }
 }
