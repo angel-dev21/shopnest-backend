@@ -2,6 +2,7 @@ package com.shopnest.shopnest.products.service;
 
 import com.shopnest.shopnest.exceptions.ResourceNotFoundException;
 import com.shopnest.shopnest.products.dto.ProductDto;
+import com.shopnest.shopnest.products.dto.ProductResponseDto;
 import com.shopnest.shopnest.products.entity.Product;
 import com.shopnest.shopnest.products.mapper.ProductMapper;
 import com.shopnest.shopnest.products.repository.ProductRepository;
@@ -21,22 +22,27 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
 
-    public List<ProductDto> getPaginatedProducts(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Product> productPage = productRepository.findAll(pageable);
-        List<Product> products = productPage.getContent();
-        return products.stream().map(productMapper::toProductDto).collect(Collectors.toList());
-    }
+
 
     /*public List<ProductDto> getAllProduct(){
         List<Product> products = productRepository.findAll();
         return products.stream().map(productMapper::toProductDto).collect(Collectors.toList());
     }*/
 
-    public ProductDto getProductById(Long id){
+    //FABRIZIO
+    public ProductResponseDto getProductById(Long id){
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
-        return productMapper.toProductDto(product);
+        System.out.println(product);
+        return productMapper.toProductResponseDto(product);
+    }
+
+    /*
+    public List<ProductDto> getPaginatedProducts(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Product> productPage = productRepository.findAll(pageable);
+        List<Product> products = productPage.getContent();
+        return products.stream().map(productMapper::toProductDto).collect(Collectors.toList());
     }
 
     public ProductDto addProduct(ProductDto productDto){
@@ -57,7 +63,7 @@ public class ProductService {
 
     public void deleteProduct(Long id){
         productRepository.deleteById(id);
-    }
+    }*/
 
     
 
