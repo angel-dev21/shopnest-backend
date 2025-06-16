@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/products")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class ProductController {
 
     private final ProductService productService;
@@ -22,10 +23,18 @@ public class ProductController {
         return ResponseEntity.ok(productService.getAllProduct());
     }*/
 
+    //Get product by id
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponseDto> getProductById(@PathVariable Long id) {
         return ResponseEntity.ok(productService.getProductById(id));
     }
+
+    //Get product by code
+    @GetMapping("/code/{code}")
+    public ResponseEntity<ProductResponseDto> getProductById(@PathVariable String code) {
+        return ResponseEntity.ok(productService.getProductByCode(code));
+    }
+
 
     @GetMapping
     public ResponseEntity<List<ProductResponseDto>> GetProductPage(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size){

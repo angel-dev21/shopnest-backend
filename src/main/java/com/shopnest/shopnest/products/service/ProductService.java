@@ -31,9 +31,15 @@ public class ProductService {
     public ProductResponseDto getProductById(Long id){
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
-        System.out.println(product);
         return productMapper.toProductResponseDto(product);
     }
+
+    public ProductResponseDto getProductByCode(String code){
+        Product product = productRepository.findByProductCode(code)
+                .orElseThrow(() -> new ResourceNotFoundException("Product with code " + code + "not found"));
+        return productMapper.toProductResponseDto(product);
+    }
+
 
     public List<ProductResponseDto> getPaginatedProducts(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
