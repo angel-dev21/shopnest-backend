@@ -3,6 +3,7 @@ package com.shopnest.shopnest.products.service;
 import com.shopnest.shopnest.exceptions.ResourceNotFoundException;
 import com.shopnest.shopnest.products.dto.ProductDto;
 import com.shopnest.shopnest.products.dto.ProductResponseDto;
+import com.shopnest.shopnest.products.dto.ProductSizeDto;
 import com.shopnest.shopnest.products.entity.Product;
 import com.shopnest.shopnest.products.mapper.ProductMapper;
 import com.shopnest.shopnest.products.repository.ProductRepository;
@@ -39,6 +40,14 @@ public class ProductService {
                 .orElseThrow(() -> new ResourceNotFoundException("Product with code " + code + "not found"));
         return productMapper.toProductResponseDto(product);
     }
+
+    public List<ProductSizeDto> getAvailableSizesForProduct(String code) {
+        Product product = productRepository.findByProductCode(code)
+                .orElseThrow(() -> new ResourceNotFoundException("Product with code " + code + "not found"));
+
+        return productMapper.toProductSizeDtoList(product.getProductSizes());
+    }
+
 
 
     public List<ProductResponseDto> getPaginatedProducts(int page, int size) {

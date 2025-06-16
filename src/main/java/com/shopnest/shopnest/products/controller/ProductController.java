@@ -3,6 +3,7 @@ package com.shopnest.shopnest.products.controller;
 
 import com.shopnest.shopnest.products.dto.ProductDto;
 import com.shopnest.shopnest.products.dto.ProductResponseDto;
+import com.shopnest.shopnest.products.dto.ProductSizeDto;
 import com.shopnest.shopnest.products.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -30,9 +31,16 @@ public class ProductController {
     }
 
     //Get product by code
-    @GetMapping("/code/{code}")
-    public ResponseEntity<ProductResponseDto> getProductById(@PathVariable String code) {
-        return ResponseEntity.ok(productService.getProductByCode(code));
+    @GetMapping("/code/{productCode}")
+    public ResponseEntity<ProductResponseDto> getProductById(@PathVariable String productCode) {
+        return ResponseEntity.ok(productService.getProductByCode(productCode));
+    }
+
+    //Get available sizes for a product
+    @GetMapping("/code/{productCode}/sizes")
+    public ResponseEntity<List<ProductSizeDto>> getAvailableSizes(@PathVariable String productCode) {
+        List<ProductSizeDto> sizes = productService.getAvailableSizesForProduct(productCode);
+        return ResponseEntity.ok(sizes);
     }
 
 
