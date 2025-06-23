@@ -1,6 +1,7 @@
 package com.shopnest.shopnest.users.entity;
 
 import com.shopnest.shopnest.cart.entity.Cart;
+import com.shopnest.shopnest.favorites.entity.Favorite;
 import com.shopnest.shopnest.orders.entity.Order;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -45,5 +47,8 @@ public class UserEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    Set<Favorite> favorites;
 
 }

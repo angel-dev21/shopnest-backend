@@ -1,5 +1,6 @@
 package com.shopnest.shopnest.products.entity;
 
+import com.shopnest.shopnest.favorites.entity.Favorite;
 import com.shopnest.shopnest.productSizes.entity.ProductSize;
 import com.shopnest.shopnest.subCategories.entity.Subcategory;
 import jakarta.persistence.*;
@@ -12,6 +13,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -67,4 +69,7 @@ public class Product {
     //Obtener las tallas de un producto
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductSize> productSizes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product")
+    Set<Favorite> favorites;
 }
