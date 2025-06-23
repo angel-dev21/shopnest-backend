@@ -1,13 +1,12 @@
-/*
+
 package com.shopnest.shopnest.favorites.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.shopnest.shopnest.products.entity.Product;
+import com.shopnest.shopnest.users.entity.UserEntity;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -17,9 +16,20 @@ import lombok.Setter;
 @Table(name = "favorites")
 public class Favorite {
 
-    @Column(name = "user_id")
-    private Long userId;
-    @Column(name = "product_id")
-    private Long productId;
+    @EmbeddedId
+    FavoriteId id;
 
-}*/
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("userId")
+    @JoinColumn(name = "user_id")
+    UserEntity user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("productId")
+    @JoinColumn(name = "product_id")
+    Product product;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+}
