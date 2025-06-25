@@ -1,7 +1,7 @@
 package com.shopnest.shopnest.users.mapper;
 
-import com.shopnest.shopnest.users.dto.CreateUserDto;
-import com.shopnest.shopnest.users.dto.UserDto;
+import com.shopnest.shopnest.users.dto.requests.CreateUserDto;
+import com.shopnest.shopnest.users.dto.responses.UserDto;
 import com.shopnest.shopnest.users.entity.UserEntity;
 import org.mapstruct.Mapper;
 
