@@ -1,4 +1,4 @@
-package com.shopnest.shopnest.users.dto;
+package com.shopnest.shopnest.users.dto.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,9 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateUserDto {
+public class UserDto {
+    private Long userId;
     private String username;
-    private String password;
     private String email;
     private String firstName;
     private String lastName;
